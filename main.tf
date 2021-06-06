@@ -2,15 +2,6 @@ provider "aws" {
   region = var.region
 }
 
-variable "region" {}
-variable "vpc_cidr_block" {}
-variable "subnet_cidr_block" {}
-variable "avail_zone" {}
-variable "env_prefix" {}
-variable "my_ip" {}
-variable "machine_ami" {}
-variable "usr_public_key" {}
-
 resource "aws_vpc" "ec2-vpc" {
   cidr_block = var.vpc_cidr_block
   tags = {
@@ -64,7 +55,7 @@ resource "aws_security_group" "ec2-sec-group" {
   name   = "SSH-incoming-sg"
   ingress = [{
     cidr_blocks      = [var.my_ip]
-    description      = "Allows incoming ssh to machine"
+    description      = "Allows SSH connection to VM"
     from_port        = 22
     ipv6_cidr_blocks = []
     prefix_list_ids  = []
@@ -87,7 +78,7 @@ resource "aws_security_group" "ec2-sec-group" {
     prefix_list_ids  = []
   }]
   tags = {
-    "Name" = "${var.env_prefix}-security-grp"
+    "Name" = "${var.env_prefix}-psecurity-gr"
   }
 }
 

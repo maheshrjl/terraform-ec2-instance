@@ -1,0 +1,8 @@
+region = "ap-south-1"
+vpc_cidr_block = "10.0.0.0/16"
+subnet_cidr_block = "10.0.10.0/24"
+avail_zone = "ap-south-1a"
+env_prefix = "development"
+my_ip = "49.207.219.212/32"
+machine_ami = "ami-010aff33ed5991201"
+usr_public_key = "~/.ssh/id_rsa.pub"
