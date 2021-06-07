@@ -88,6 +88,7 @@ resource "aws_key_pair" "ssh-key" {
 }
 
 resource "aws_instance" "ec2-server" {
+  count                       = var.instance_count
   ami                         = var.machine_ami
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.ec2-subnet.id
@@ -96,10 +97,10 @@ resource "aws_instance" "ec2-server" {
   associate_public_ip_address = true
   key_name                    = aws_key_pair.ssh-key.key_name
   tags = {
-    "Name" = "${var.env_prefix}-server"
+    "Name" = "${var.env_prefix}-${count.index}server"
   }
 }
 
 output "ec2_public_ip" {
-  value = aws_instance.ec2-server.public_ip
+  value = aws_instance.ec2-server.*.public_ip
 }
