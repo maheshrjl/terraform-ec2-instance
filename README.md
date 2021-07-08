@@ -14,5 +14,10 @@ terraform validate
 terraform apply
 ```
 
+## Connecting to Instances?
+`ssh ec2-user@public-ip-address
+`
+
+
 # Coded in Terraform v0.14.7
 ### Tested in Terraform v1.0.1/aws v3.32.0
