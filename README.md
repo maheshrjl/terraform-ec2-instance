@@ -3,7 +3,7 @@
 
 ## How to run?
 
-Create a [terraform.tfvars] file in the project directory & provide values to variables from the variables.tf file
+Create a [terraform.tfvars] file in the project directory & provide values to variables from the variables.tf file [Optional]
 
 
 ## Usage
@@ -20,4 +20,4 @@ terraform apply
 
 
 # Coded in Terraform v0.14.7
-### Tested in Terraform v1.0.1/aws v3.32.0
+### Tested in Terraform v1.1.7/aws v4.8.0

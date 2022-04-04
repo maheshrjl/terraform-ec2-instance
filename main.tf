@@ -1,7 +1,3 @@
-provider "aws" {
-  region = var.region
-}
-
 resource "aws_vpc" "ec2-vpc" {
   cidr_block = var.vpc_cidr_block
   tags = {
@@ -50,38 +46,6 @@ resource "aws_route_table_association" "ec2-rtb-assoc" {
   route_table_id = aws_route_table.ec2-rtb.id
 }
 
-resource "aws_security_group" "ec2-sec-group" {
-  vpc_id = aws_vpc.ec2-vpc.id
-  name   = "SSH-incoming-sg"
-  ingress = [{
-    cidr_blocks      = [var.my_ip]
-    description      = "Allows SSH connection to VM"
-    from_port        = 22
-    ipv6_cidr_blocks = []
-    prefix_list_ids  = []
-    protocol         = "tcp"
-    security_groups  = []
-    self             = false
-    to_port          = 22
-  }]
-
-  egress = [{
-    cidr_blocks      = ["0.0.0.0/0"]
-    description      = ""
-    from_port        = 0
-    ipv6_cidr_blocks = []
-    prefix_list_ids  = []
-    protocol         = "-1"
-    security_groups  = []
-    self             = false
-    to_port          = 0
-    prefix_list_ids  = []
-  }]
-  tags = {
-    "Name" = "${var.env_prefix}-psecurity-gr"
-  }
-}
-
 resource "aws_key_pair" "ssh-key" {
   key_name   = "trf-key-pair"
   public_key = file(var.usr_public_key)
@@ -99,8 +63,4 @@ resource "aws_instance" "ec2-server" {
   tags = {
     "Name" = "${var.env_prefix}-${count.index}server"
   }
-}
-
-output "ec2_public_ip" {
-  value = aws_instance.ec2-server.*.public_ip
 }

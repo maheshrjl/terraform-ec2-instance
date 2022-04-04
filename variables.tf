@@ -1,10 +1,10 @@
 # All variables defined here have to be given a value using the terraform.tfvarsfile
 variable "region" {
-    default = "ap-south-1" #This is the region
+    default = "ap-south-1" #This is the default region
 }
 
 variable "instance_count" {
-    default = 2 #This is the number of instances
+    default = 1 #This is the number of instances
 }
 
 variable "vpc_cidr_block" {
@@ -26,7 +26,9 @@ variable "env_prefix" {
 variable "usr_public_key" {
     default = "~/.ssh/id_rsa.pub"# Give a path to your public key: ~/.ssh/id_rsa.pub If not create the key using ssh-keygen
 }
-variable "my_ip" {} #Write your ip in CIDR notation Eg: YourIpAddress/32. This IP is used to create security groups
-variable "machine_ami" {} #"ami-010aff33ed5991201"
+
+variable "machine_ami" {
+    default = "ami-04893cdb768d0f9ee"
+}
 
 #It is recommended to create a separate terraform.tfvars file & define all variables
